@@ -122,3 +122,63 @@ for (let prop in rabbit4) {
         console.log(`Inherited: ${prop}`); // Inherited: eats
     }
 }
+
+
+// Working with Objects
+let animal5 = {
+    jumps: null
+};
+
+let rabbit5 = {
+    __proto__: animal5,
+    jumps: true
+};
+
+console.log(rabbit5.jumps); // true
+delete rabbit5.jumps;
+console.log(rabbit5.jumps); // null
+delete animal5.jumps;
+console.log(rabbit5.jumps); // undefined
+
+//F.prototype
+let animal6 = {
+    eats: true
+};
+
+function Rabbit6(name) {
+    this.name = name;
+    console.log(this.name); //prints value in name
+}
+Rabbit6.prototype = animal6;
+
+let rabbit6 = new Rabbit6("White Rabbit"); // rabbit.__proto__ == animal
+console.log(rabbit6.eats); // true
+console.log(rabbit6.name); // White Rabbit
+
+// rabbit6.Rabbit6("Sai"); //error Rabbit6 is not a function
+
+Rabbit6("Sumanth");
+console.log(this.name); //undefined
+
+
+function Rabbit() { }
+/* default prototype
+    Rabbit.prototype = { constructor: Rabbit };
+*/
+
+function Rabbit() { }
+// by default:
+// Rabbit.prototype = { constructor: Rabbit }
+console.log(Rabbit.prototype.constructor == Rabbit); // true
+
+
+
+function Rabbit7() { }
+Rabbit7.prototype = {
+    eats: true
+};
+
+let rabbit7 = new Rabbit7();
+delete Rabbit7.prototype.eats;
+console.log(rabbit7.eats); // true
+
